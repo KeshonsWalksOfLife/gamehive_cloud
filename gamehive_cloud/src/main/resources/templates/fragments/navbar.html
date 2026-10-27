@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <!-- th:fragment names this block so other pages can pull it in -->
+        <nav th:fragment="navbar" class="navbar navbar-expand navbar-dark bg-dark mb-4 rounded">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/products">GameHive</a>
+                <div class="navbar-nav">
+                    <a class="nav-link" href="/products">Products</a>
+                    <a class="nav-link" href="/products/new">Add Product</a>
+                    <a class="nav-link" href="/orders">Orders</a>
+                    <a class="nav-link" href="/users/register">Register</a>
+                </div>
+            </div>
+        </nav>
+    </body>
+</html>

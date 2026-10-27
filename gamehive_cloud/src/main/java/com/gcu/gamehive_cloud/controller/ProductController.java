@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -54,6 +55,24 @@ public class ProductController {
 		productRepository.save(product);
 		logger.info("Saved new product: {}", product.getName());
 		// After new product has been saved go back to the list
+		return "redirect:/products";
+	}
+	
+	// Shows the form was filled in with an existing product
+	@GetMapping("/{id}/edit")
+	public String ShowEditForm(@PathVariable Integer id, Model model)
+	{
+		logger.info("Editing form for product: {}", id);
+		model.addAttribute("product", productRepository.findById(id).orElseThrow());
+		return "product-form";
+	}
+	
+	// Remove a product by ID
+	@PostMapping("/{id}/delete")
+	public String DeleteProduct(@PathVariable Integer id)
+	{
+		productRepository.deleteById(id);
+		logger.info("Deleting product: {}", id);
 		return "redirect:/products";
 	}
 }
